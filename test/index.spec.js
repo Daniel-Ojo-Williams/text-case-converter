@@ -4,319 +4,594 @@ import assert from "node:assert/strict";
 import converter from "../src/index.js";
 
 describe("toUpperCase", () => {
-  it("converts lowercase to uppercase", () => {
-    assert.equal(converter.toUpperCase("hello world"), "HELLO WORLD");
-  });
-  it("converts mixed case to uppercase", () => {
-    assert.equal(converter.toUpperCase("mIxEd CaSe"), "MIXED CASE");
-  });
-  it("keeps uppercase as uppercase", () => {
-    assert.equal(converter.toUpperCase("HELLO WORLD"), "HELLO WORLD");
-  });
-  it("trims leading and trailing spaces", () => {
-    assert.equal(converter.toUpperCase("  hello world  "), "HELLO WORLD");
-  });
-  it("collapses multiple spaces into one", () => {
-    assert.equal(converter.toUpperCase("hello   world"), "HELLO WORLD");
-  });
-  it("trims and collapses spaces together", () => {
-    assert.equal(converter.toUpperCase("  hello   world  "), "HELLO WORLD");
-  });
-  it("handles single word", () => {
-    assert.equal(converter.toUpperCase("word"), "WORD");
-  });
-  it("handles empty string", () => {
-    assert.equal(converter.toUpperCase(""), "");
+  const testCases = [
+    {
+      input: "hello world",
+      expected: "HELLO WORLD",
+      description: "converts lowercase to uppercase"
+    },
+    {
+      input: "mIxEd CaSe",
+      expected: "MIXED CASE",
+      description: "converts mixed case to uppercase"
+    },
+    {
+      input: "HELLO WORLD",
+      expected: "HELLO WORLD",
+      description: "keeps uppercase as uppercase"
+    },
+    {
+      input: "  hello world  ",
+      expected: "HELLO WORLD",
+      description: "trims leading and trailing spaces"
+    },
+    {
+      input: "hello   world",
+      expected: "HELLO WORLD",
+      description: "collapses multiple spaces into one"
+    },
+    {
+      input: "  hello   world  ",
+      expected: "HELLO WORLD",
+      description: "trims and collapses spaces together"
+    },
+    {
+      input: "word",
+      expected: "WORD",
+      description: "handles single word"
+    },
+    {
+      input: "",
+      expected: "",
+      description: "handles empty string"
+    }
+  ];
+
+  testCases.forEach(({ input, expected, description }) => {
+    it(description, () => {
+      const output = converter.toUpperCase(input);
+      assert.equal(output, expected);
+    });
   });
 });
 
 describe("toLowerCase", () => {
-  it("converts uppercase to lowercase", () => {
-    assert.equal(converter.toLowerCase("HELLO WORLD"), "hello world");
-  });
-  it("converts mixed case to lowercase", () => {
-    assert.equal(converter.toLowerCase("mIxEd CaSe"), "mixed case");
-  });
-  it("keeps lowercase as lowercase", () => {
-    assert.equal(converter.toLowerCase("hello world"), "hello world");
-  });
-  it("trims leading and trailing spaces", () => {
-    assert.equal(converter.toLowerCase("  HELLO WORLD  "), "hello world");
-  });
-  it("collapses multiple spaces into one", () => {
-    assert.equal(converter.toLowerCase("HELLO   WORLD"), "hello world");
-  });
-  it("trims and collapses spaces together", () => {
-    assert.equal(converter.toLowerCase("  HELLO   WORLD  "), "hello world");
-  });
-  it("handles single word", () => {
-    assert.equal(converter.toLowerCase("WORD"), "word");
-  });
-  it("handles empty string", () => {
-    assert.equal(converter.toLowerCase(""), "");
+  const testCases = [
+    {
+      input: "HELLO WORLD",
+      expected: "hello world",
+      description: "converts uppercase to lowercase"
+    },
+    {
+      input: "mIxEd CaSe",
+      expected: "mixed case",
+      description: "converts mixed case to lowercase"
+    },
+    {
+      input: "hello world",
+      expected: "hello world",
+      description: "keeps lowercase as lowercase"
+    },
+    {
+      input: "  HELLO WORLD  ",
+      expected: "hello world",
+      description: "trims leading and trailing spaces"
+    },
+    {
+      input: "HELLO   WORLD",
+      expected: "hello world",
+      description: "collapses multiple spaces into one"
+    },
+    {
+      input: "  HELLO   WORLD  ",
+      expected: "hello world",
+      description: "trims and collapses spaces together"
+    },
+    {
+      input: "WORD",
+      expected: "word",
+      description: "handles single word"
+    },
+    {
+      input: "",
+      expected: "",
+      description: "handles empty string"
+    }
+  ];
+
+  testCases.forEach(({ input, expected, description }) => {
+    it(description, () => {
+      const output = converter.toLowerCase(input);
+      assert.equal(output, expected);
+    });
   });
 });
 
 describe("toSentenceCase", () => {
-  it("capitalizes first letter, lowercases rest", () => {
-    assert.equal(converter.toSentenceCase("hello world"), "Hello world");
-  });
-  it("lowercases all-uppercase except first letter", () => {
-    assert.equal(converter.toSentenceCase("HELLO WORLD"), "Hello world");
-  });
-  it("handles mixed case", () => {
-    assert.equal(converter.toSentenceCase("mIxEd CaSe StRiNg"), "Mixed case string");
-  });
-  it("handles already correct sentence case", () => {
-    assert.equal(converter.toSentenceCase("Hello world"), "Hello world");
-  });
-  it("trims leading and trailing spaces", () => {
-    assert.equal(converter.toSentenceCase("  hello world  "), "Hello world");
-  });
-  it("collapses multiple spaces into one", () => {
-    assert.equal(converter.toSentenceCase("hello   world"), "Hello world");
-  });
-  it("trims and collapses spaces together", () => {
-    assert.equal(converter.toSentenceCase("  hello   world  "), "Hello world");
-  });
-  it("handles single word", () => {
-    assert.equal(converter.toSentenceCase("word"), "Word");
-  });
-  it("handles empty string", () => {
-    assert.equal(converter.toSentenceCase(""), "");
+  const testCases = [
+    {
+      input: "hello world",
+      expected: "Hello world",
+      description: "capitalizes first letter, lowercases rest"
+    },
+    {
+      input: "HELLO WORLD",
+      expected: "Hello world",
+      description: "lowercases all-uppercase except first letter"
+    },
+    {
+      input: "mIxEd CaSe StRiNg",
+      expected: "Mixed case string",
+      description: "handles mixed case"
+    },
+    {
+      input: "Hello world",
+      expected: "Hello world",
+      description: "handles already correct sentence case"
+    },
+    {
+      input: "  hello world  ",
+      expected: "Hello world",
+      description: "trims leading and trailing spaces"
+    },
+    {
+      input: "hello   world",
+      expected: "Hello world",
+      description: "collapses multiple spaces into one"
+    },
+    {
+      input: "  hello   world  ",
+      expected: "Hello world",
+      description: "trims and collapses spaces together"
+    },
+    {
+      input: "word",
+      expected: "Word",
+      description: "handles single word"
+    },
+    {
+      input: "",
+      expected: "",
+      description: "handles empty string"
+    }
+  ];
+
+  testCases.forEach(({ input, expected, description }) => {
+    it(description, () => {
+      const output = converter.toSentenceCase(input);
+      assert.equal(output, expected);
+    });
   });
 });
 
 describe("toTitleCase", () => {
-  it("capitalizes first letter of each word", () => {
-    assert.equal(converter.toTitleCase("hello world"), "Hello World");
-  });
-  it("handles all uppercase input", () => {
-    assert.equal(converter.toTitleCase("HELLO WORLD"), "Hello World");
-  });
-  it("handles mixed case", () => {
-    assert.equal(converter.toTitleCase("mIxEd CaSe StRiNg"), "Mixed Case String");
-  });
-  it("handles longer phrase", () => {
-    assert.equal(converter.toTitleCase("the quick brown fox"), "The Quick Brown Fox");
-  });
-  it("trims leading and trailing spaces", () => {
-    assert.equal(converter.toTitleCase("  hello world  "), "Hello World");
-  });
-  it("collapses multiple spaces into one", () => {
-    assert.equal(converter.toTitleCase("hello   world"), "Hello World");
-  });
-  it("trims and collapses spaces together", () => {
-    assert.equal(converter.toTitleCase("  hello   world  "), "Hello World");
-  });
-  it("handles single word", () => {
-    assert.equal(converter.toTitleCase("word"), "Word");
-  });
-  it("handles empty string", () => {
-    assert.equal(converter.toTitleCase(""), "");
-  });
-  it("capitalizes stop words if they are the first word", () => {
-    assert.equal(converter.toTitleCase("the lord of the rings"), "The Lord of the Rings");
-  });
-  it("keeps stop words lowercase in the middle of a string", () => {
-    assert.equal(converter.toTitleCase("A BEAUTIFUL DAY IN THE NEIGHBORHOOD"), "A Beautiful Day in the Neighborhood");
+  const testCases = [
+    {
+      input: "hello world",
+      expected: "Hello World",
+      description: "capitalizes first letter of each word"
+    },
+    {
+      input: "HELLO WORLD",
+      expected: "Hello World",
+      description: "handles all uppercase input"
+    },
+    {
+      input: "mIxEd CaSe StRiNg",
+      expected: "Mixed Case String",
+      description: "handles mixed case"
+    },
+    {
+      input: "the quick brown fox",
+      expected: "The Quick Brown Fox",
+      description: "handles longer phrase"
+    },
+    {
+      input: "  hello world  ",
+      expected: "Hello World",
+      description: "trims leading and trailing spaces"
+    },
+    {
+      input: "hello   world",
+      expected: "Hello World",
+      description: "collapses multiple spaces into one"
+    },
+    {
+      input: "  hello   world  ",
+      expected: "Hello World",
+      description: "trims and collapses spaces together"
+    },
+    {
+      input: "word",
+      expected: "Word",
+      description: "handles single word"
+    },
+    {
+      input: "",
+      expected: "",
+      description: "handles empty string"
+    },
+    {
+      input: "the lord of the rings",
+      expected: "The Lord of the Rings",
+      description: "capitalizes stop words if they are the first word"
+    },
+    {
+      input: "A BEAUTIFUL DAY IN THE NEIGHBORHOOD",
+      expected: "A Beautiful Day in the Neighborhood",
+      description: "keeps stop words lowercase in the middle of a string"
+    }
+  ];
+
+  testCases.forEach(({ input, expected, description }) => {
+    it(description, () => {
+      const output = converter.toTitleCase(input);
+      assert.equal(output, expected);
+    });
   });
 });
 
 describe("toKebabCase", () => {
-  it("converts space-separated words to kebab-case", () => {
-    assert.equal(converter.toKebabCase("hello world"), "hello-world");
-  });
-  it("converts PascalCase to kebab-case", () => {
-    assert.equal(converter.toKebabCase("HelloWorld"), "hello-world");
-  });
-  it("converts camelCase to kebab-case", () => {
-    assert.equal(converter.toKebabCase("helloWorld"), "hello-world");
-  });
-  it("converts snake_case to kebab-case", () => {
-    assert.equal(converter.toKebabCase("hello_world"), "hello-world");
-  });
-  it("converts UPPER CASE to kebab-case", () => {
-    assert.equal(converter.toKebabCase("HELLO WORLD"), "hello-world");
-  });
-  it("handles longer phrase", () => {
-    assert.equal(converter.toKebabCase("the quick brown fox"), "the-quick-brown-fox");
-  });
-  it("trims leading and trailing spaces", () => {
-    assert.equal(converter.toKebabCase("  hello world  "), "hello-world");
-  });
-  it("collapses multiple spaces into one dash", () => {
-    assert.equal(converter.toKebabCase("hello   world"), "hello-world");
-  });
-  it("trims and collapses spaces together", () => {
-    assert.equal(converter.toKebabCase("  hello   world  "), "hello-world");
-  });
-  it("handles single word", () => {
-    assert.equal(converter.toKebabCase("word"), "word");
-  });
-  it("handles empty string", () => {
-    assert.equal(converter.toKebabCase(""), "");
+  const testCases = [
+    {
+      input: "hello world",
+      expected: "hello-world",
+      description: "converts space-separated words to kebab-case"
+    },
+    {
+      input: "HelloWorld",
+      expected: "hello-world",
+      description: "converts PascalCase to kebab-case"
+    },
+    {
+      input: "helloWorld",
+      expected: "hello-world",
+      description: "converts camelCase to kebab-case"
+    },
+    {
+      input: "hello_world",
+      expected: "hello-world",
+      description: "converts snake_case to kebab-case"
+    },
+    {
+      input: "HELLO WORLD",
+      expected: "hello-world",
+      description: "converts UPPER CASE to kebab-case"
+    },
+    {
+      input: "the quick brown fox",
+      expected: "the-quick-brown-fox",
+      description: "handles longer phrase"
+    },
+    {
+      input: "  hello world  ",
+      expected: "hello-world",
+      description: "trims leading and trailing spaces"
+    },
+    {
+      input: "hello   world",
+      expected: "hello-world",
+      description: "collapses multiple spaces into one dash"
+    },
+    {
+      input: "  hello   world  ",
+      expected: "hello-world",
+      description: "trims and collapses spaces together"
+    },
+    {
+      input: "word",
+      expected: "word",
+      description: "handles single word"
+    },
+    {
+      input: "",
+      expected: "",
+      description: "handles empty string"
+    }
+  ];
+
+  testCases.forEach(({ input, expected, description }) => {
+    it(description, () => {
+      const output = converter.toKebabCase(input);
+      assert.equal(output, expected);
+    });
   });
 });
 
 describe("toSnakeCase", () => {
-  it("converts space-separated words to snake_case", () => {
-    assert.equal(converter.toSnakeCase("hello world"), "hello_world");
-  });
-  it("converts PascalCase to snake_case", () => {
-    assert.equal(converter.toSnakeCase("HelloWorld"), "hello_world");
-  });
-  it("converts camelCase to snake_case", () => {
-    assert.equal(converter.toSnakeCase("helloWorld"), "hello_world");
-  });
-  it("converts kebab-case to snake_case", () => {
-    assert.equal(converter.toSnakeCase("hello-world"), "hello_world");
-  });
-  it("converts UPPER CASE to snake_case", () => {
-    assert.equal(converter.toSnakeCase("HELLO WORLD"), "hello_world");
-  });
-  it("handles longer phrase", () => {
-    assert.equal(converter.toSnakeCase("the quick brown fox"), "the_quick_brown_fox");
-  });
-  it("trims leading and trailing spaces", () => {
-    assert.equal(converter.toSnakeCase("  hello world  "), "hello_world");
-  });
-  it("collapses multiple spaces into one underscore", () => {
-    assert.equal(converter.toSnakeCase("hello   world"), "hello_world");
-  });
-  it("trims and collapses spaces together", () => {
-    assert.equal(converter.toSnakeCase("  hello   world  "), "hello_world");
-  });
-  it("handles single word", () => {
-    assert.equal(converter.toSnakeCase("word"), "word");
-  });
-  it("handles empty string", () => {
-    assert.equal(converter.toSnakeCase(""), "");
+  const testCases = [
+    {
+      input: "hello world",
+      expected: "hello_world",
+      description: "converts space-separated words to snake_case"
+    },
+    {
+      input: "HelloWorld",
+      expected: "hello_world",
+      description: "converts PascalCase to snake_case"
+    },
+    {
+      input: "helloWorld",
+      expected: "hello_world",
+      description: "converts camelCase to snake_case"
+    },
+    {
+      input: "hello-world",
+      expected: "hello_world",
+      description: "converts kebab-case to snake_case"
+    },
+    {
+      input: "HELLO WORLD",
+      expected: "hello_world",
+      description: "converts UPPER CASE to snake_case"
+    },
+    {
+      input: "the quick brown fox",
+      expected: "the_quick_brown_fox",
+      description: "handles longer phrase"
+    },
+    {
+      input: "  hello world  ",
+      expected: "hello_world",
+      description: "trims leading and trailing spaces"
+    },
+    {
+      input: "hello   world",
+      expected: "hello_world",
+      description: "collapses multiple spaces into one underscore"
+    },
+    {
+      input: "  hello   world  ",
+      expected: "hello_world",
+      description: "trims and collapses spaces together"
+    },
+    {
+      input: "word",
+      expected: "word",
+      description: "handles single word"
+    },
+    {
+      input: "",
+      expected: "",
+      description: "handles empty string"
+    }
+  ];
+
+  testCases.forEach(({ input, expected, description }) => {
+    it(description, () => {
+      const output = converter.toSnakeCase(input);
+      assert.equal(output, expected);
+    });
   });
 });
 
 describe("toPascalCase", () => {
-  it("converts space-separated words to PascalCase", () => {
-    assert.equal(converter.toPascalCase("hello world"), "HelloWorld");
-  });
-  it("converts kebab-case to PascalCase", () => {
-    assert.equal(converter.toPascalCase("hello-world"), "HelloWorld");
-  });
-  it("converts snake_case to PascalCase", () => {
-    assert.equal(converter.toPascalCase("hello_world"), "HelloWorld");
-  });
-  it("converts camelCase to PascalCase", () => {
-    assert.equal(converter.toPascalCase("helloWorld"), "HelloWorld");
-  });
-  it("keeps PascalCase as PascalCase", () => {
-    assert.equal(converter.toPascalCase("HelloWorld"), "HelloWorld");
-  });
-  it("converts UPPER CASE to PascalCase", () => {
-    assert.equal(converter.toPascalCase("HELLO WORLD"), "HelloWorld");
-  });
-  it("handles longer phrase", () => {
-    assert.equal(converter.toPascalCase("the quick brown fox"), "TheQuickBrownFox");
-  });
-  it("trims leading and trailing spaces", () => {
-    assert.equal(converter.toPascalCase("  hello world  "), "HelloWorld");
-  });
-  it("collapses multiple spaces", () => {
-    assert.equal(converter.toPascalCase("hello   world"), "HelloWorld");
-  });
-  it("trims and collapses spaces together", () => {
-    assert.equal(converter.toPascalCase("  hello   world  "), "HelloWorld");
-  });
-  it("handles single word", () => {
-    assert.equal(converter.toPascalCase("word"), "Word");
-  });
-  it("handles empty string", () => {
-    assert.equal(converter.toPascalCase(""), "");
-  });
-  it("handles strings with numbers correctly", () => {
-    assert.equal(converter.toCamelCase("user 123 login"), "user123Login");
-  });
-  it("handles numbers at the start of words", () => {
-    assert.equal(converter.toPascalCase("version 2 update"), "Version2Update");
+  const testCases = [
+    {
+      input: "hello world",
+      expected: "HelloWorld",
+      description: "converts space-separated words to PascalCase"
+    },
+    {
+      input: "hello-world",
+      expected: "HelloWorld",
+      description: "converts kebab-case to PascalCase"
+    },
+    {
+      input: "hello_world",
+      expected: "HelloWorld",
+      description: "converts snake_case to PascalCase"
+    },
+    {
+      input: "helloWorld",
+      expected: "HelloWorld",
+      description: "converts camelCase to PascalCase"
+    },
+    {
+      input: "HelloWorld",
+      expected: "HelloWorld",
+      description: "keeps PascalCase as PascalCase"
+    },
+    {
+      input: "HELLO WORLD",
+      expected: "HelloWorld",
+      description: "converts UPPER CASE to PascalCase"
+    },
+    {
+      input: "the quick brown fox",
+      expected: "TheQuickBrownFox",
+      description: "handles longer phrase"
+    },
+    {
+      input: "  hello world  ",
+      expected: "HelloWorld",
+      description: "trims leading and trailing spaces"
+    },
+    {
+      input: "hello   world",
+      expected: "HelloWorld",
+      description: "collapses multiple spaces"
+    },
+    {
+      input: "  hello   world  ",
+      expected: "HelloWorld",
+      description: "trims and collapses spaces together"
+    },
+    {
+      input: "word",
+      expected: "Word",
+      description: "handles single word"
+    },
+    {
+      input: "",
+      expected: "",
+      description: "handles empty string"
+    },
+    {
+      input: "version 2 update",
+      expected: "Version2Update",
+      description: "handles numbers at the start of words"
+    }
+  ];
+
+  testCases.forEach(({ input, expected, description }) => {
+    it(description, () => {
+      const output = converter.toPascalCase(input);
+      assert.equal(output, expected);
+    });
   });
 });
 
 describe("toCamelCase", () => {
-  it("converts space-separated words to camelCase", () => {
-    assert.equal(converter.toCamelCase("hello world"), "helloWorld");
-  });
-  it("converts kebab-case to camelCase", () => {
-    assert.equal(converter.toCamelCase("hello-world"), "helloWorld");
-  });
-  it("converts snake_case to camelCase", () => {
-    assert.equal(converter.toCamelCase("hello_world"), "helloWorld");
-  });
-  it("keeps camelCase as camelCase", () => {
-    assert.equal(converter.toCamelCase("helloWorld"), "helloWorld");
-  });
-  it("converts PascalCase to camelCase", () => {
-    assert.equal(converter.toCamelCase("HelloWorld"), "helloWorld");
-  });
-  it("converts UPPER CASE to camelCase", () => {
-    assert.equal(converter.toCamelCase("HELLO WORLD"), "helloWorld");
-  });
-  it("handles longer phrase", () => {
-    assert.equal(converter.toCamelCase("the quick brown fox"), "theQuickBrownFox");
-  });
-  it("trims leading and trailing spaces", () => {
-    assert.equal(converter.toCamelCase("  hello world  "), "helloWorld");
-  });
-  it("collapses multiple spaces", () => {
-    assert.equal(converter.toCamelCase("hello   world"), "helloWorld");
-  });
-  it("trims and collapses spaces together", () => {
-    assert.equal(converter.toCamelCase("  hello   world  "), "helloWorld");
-  });
-  it("handles single word", () => {
-    assert.equal(converter.toCamelCase("word"), "word");
-  });
-  it("handles empty string", () => {
-    assert.equal(converter.toCamelCase(""), "");
+  const testCases = [
+    {
+      input: "hello world",
+      expected: "helloWorld",
+      description: "converts space-separated words to camelCase"
+    },
+    {
+      input: "hello-world",
+      expected: "helloWorld",
+      description: "converts kebab-case to camelCase"
+    },
+    {
+      input: "hello_world",
+      expected: "helloWorld",
+      description: "converts snake_case to camelCase"
+    },
+    {
+      input: "helloWorld",
+      expected: "helloWorld",
+      description: "keeps camelCase as camelCase"
+    },
+    {
+      input: "HelloWorld",
+      expected: "helloWorld",
+      description: "converts PascalCase to camelCase"
+    },
+    {
+      input: "HELLO WORLD",
+      expected: "helloWorld",
+      description: "converts UPPER CASE to camelCase"
+    },
+    {
+      input: "the quick brown fox",
+      expected: "theQuickBrownFox",
+      description: "handles longer phrase"
+    },
+    {
+      input: "  hello world  ",
+      expected: "helloWorld",
+      description: "trims leading and trailing spaces"
+    },
+    {
+      input: "hello   world",
+      expected: "helloWorld",
+      description: "collapses multiple spaces"
+    },
+    {
+      input: "  hello   world  ",
+      expected: "helloWorld",
+      description: "trims and collapses spaces together"
+    },
+    {
+      input: "word",
+      expected: "word",
+      description: "handles single word"
+    },
+    {
+      input: "",
+      expected: "",
+      description: "handles empty string"
+    },
+    {
+      input: "user 123 login",
+      expected: "user123Login",
+      description: "handles strings with numbers correctly"
+    }
+  ];
+
+  testCases.forEach(({ input, expected, description }) => {
+    it(description, () => {
+      const output = converter.toCamelCase(input);
+      assert.equal(output, expected);
+    });
   });
 });
 
-describe("toSlug", () => {
-  it("converts space-separated words to slug", () => {
-    assert.equal(converter.slugify("hello world"), "hello-world");
-  });
-  it("removes special characters", () => {
-    assert.equal(converter.slugify("hello, world!"), "hello-world");
-  });
-  it("handles apostrophes", () => {
-    assert.equal(converter.slugify("it's a beautiful day"), "its-a-beautiful-day");
-  });
-  it("converts to lowercase", () => {
-    assert.equal(converter.slugify("HELLO WORLD"), "hello-world");
-  });
-  it("handles longer phrase", () => {
-    assert.equal(converter.slugify("the quick brown fox"), "the-quick-brown-fox");
-  });
-  it("trims leading and trailing spaces", () => {
-    assert.equal(converter.slugify("  hello world  "), "hello-world");
-  });
-  it("collapses multiple spaces into one dash", () => {
-    assert.equal(converter.slugify("hello   world"), "hello-world");
-  });
-  it("trims and collapses spaces together", () => {
-    assert.equal(converter.slugify("  hello   world  "), "hello-world");
-  });
-  it("removes consecutive dashes after stripping special chars", () => {
-    assert.equal(converter.slugify("hello -- world"), "hello-world");
-  });
-  it("handles single word", () => {
-    assert.equal(converter.slugify("word"), "word");
-  });
-  it("handles empty string", () => {
-    assert.equal(converter.slugify(""), "");
-  });
-  it("should not change a string that is already a valid slug", () => {
-    assert.equal(converter.slugify("already-a-valid-slug"), "already-a-valid-slug");
-  });
-  it("handles strings that are already partially slugified", () => {
-    assert.equal(converter.slugify("My-Blog-Post!"), "my-blog-post");
+describe("slugify", () => {
+  const testCases = [
+    {
+      input: "hello world",
+      expected: "hello-world",
+      description: "converts space-separated words to slug"
+    },
+    {
+      input: "hello, world!",
+      expected: "hello-world",
+      description: "removes special characters"
+    },
+    {
+      input: "it's a beautiful day",
+      expected: "its-a-beautiful-day",
+      description: "handles apostrophes"
+    },
+    {
+      input: "HELLO WORLD",
+      expected: "hello-world",
+      description: "converts to lowercase"
+    },
+    {
+      input: "the quick brown fox",
+      expected: "the-quick-brown-fox",
+      description: "handles longer phrase"
+    },
+    {
+      input: "  hello world  ",
+      expected: "hello-world",
+      description: "trims leading and trailing spaces"
+    },
+    {
+      input: "hello   world",
+      expected: "hello-world",
+      description: "collapses multiple spaces into one dash"
+    },
+    {
+      input: "  hello   world  ",
+      expected: "hello-world",
+      description: "trims and collapses spaces together"
+    },
+    {
+      input: "hello -- world",
+      expected: "hello-world",
+      description: "removes consecutive dashes after stripping special chars"
+    },
+    {
+      input: "word",
+      expected: "word",
+      description: "handles single word"
+    },
+    {
+      input: "",
+      expected: "",
+      description: "handles empty string"
+    },
+    {
+      input: "already-a-valid-slug",
+      expected: "already-a-valid-slug",
+      description: "should not change a string that is already a valid slug"
+    },
+    {
+      input: "My-Blog-Post!",
+      expected: "my-blog-post",
+      description: "handles strings that are already partially slugified"
+    }
+  ];
+
+  testCases.forEach(({ input, expected, description }) => {
+    it(description, () => {
+      const output = converter.slugify(input);
+      assert.equal(output, expected);
+    });
   });
 });
