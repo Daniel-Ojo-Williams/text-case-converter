@@ -4,7 +4,7 @@
   "description": "A lightweight utility to convert texts into various cases (upper, lower, camel, kebab, snake, etc...)",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node test/index.spec.js"
   },
   "keywords": ["text-converter", "text", "slugify", "case"],
   "author": "Daniel Ojo-Williams",
