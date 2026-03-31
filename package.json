@@ -1,6 +1,6 @@
 {
   "name": "@owdanny/text-case-converter",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A lightweight utility to convert texts into various cases (upper, lower, camel, kebab, snake, etc...)",
   "main": "./src/index.js",
   "module": "./src/index.js",
@@ -14,7 +14,12 @@
       "types": "./src/index.d.ts"
     }
   },
-  "keywords": ["text-converter", "text", "slugify", "case"],
+  "keywords": [
+    "text-converter",
+    "text",
+    "slugify",
+    "case"
+  ],
   "author": "Daniel Ojo-Williams",
   "license": "MIT",
   "type": "module"
