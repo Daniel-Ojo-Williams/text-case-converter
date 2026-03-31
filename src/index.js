@@ -94,10 +94,9 @@ const caseConverter = {
      * 
      * @param {string} text 
      * @param {Object} [options={}] 
-     * @param {"kebab"|"snake"|"camel"|"pascal"} options.currentCase 
      * @returns {string}
      */
-    toSnakeCase(text, options = {}) {
+    toSnakeCase(text) {
         if (!text?.trim()) return "";
         text = this._normalize(text, { removePunctuations: true });
 
