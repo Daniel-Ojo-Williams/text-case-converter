@@ -1,5 +1,5 @@
 {
-  "name": "text-case-converter",
+  "name": "@owdanny/text-case-converter",
   "version": "1.0.0",
   "description": "A lightweight utility to convert texts into various cases (upper, lower, camel, kebab, snake, etc...)",
   "main": "index.js",
